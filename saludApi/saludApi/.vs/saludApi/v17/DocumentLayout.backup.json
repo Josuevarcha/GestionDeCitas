@@ -1,0 +1,100 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Josue\\Desktop\\salud-en-linea-Api-main\\saludApi\\saludApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8257C0DC-B9B9-4F71-AC6D-0F9320079D5A}|saludApi.csproj|c:\\users\\josue\\desktop\\salud-en-linea-api-main\\saludapi\\saludapi\\controllers\\citascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8257C0DC-B9B9-4F71-AC6D-0F9320079D5A}|saludApi.csproj|solutionrelative:controllers\\citascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8257C0DC-B9B9-4F71-AC6D-0F9320079D5A}|saludApi.csproj|c:\\users\\josue\\desktop\\salud-en-linea-api-main\\saludapi\\saludapi\\data\\saludcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8257C0DC-B9B9-4F71-AC6D-0F9320079D5A}|saludApi.csproj|solutionrelative:data\\saludcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SaludContext.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\salud-en-linea-Api-main\\saludApi\\saludApi\\Data\\SaludContext.cs",
+              "RelativeDocumentMoniker": "Data\\SaludContext.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\salud-en-linea-Api-main\\saludApi\\saludApi\\Data\\SaludContext.cs",
+              "RelativeToolTip": "Data\\SaludContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T14:35:53.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CitasController.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\salud-en-linea-Api-main\\saludApi\\saludApi\\Controllers\\CitasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CitasController.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\salud-en-linea-Api-main\\saludApi\\saludApi\\Controllers\\CitasController.cs",
+              "RelativeToolTip": "Controllers\\CitasController.cs",
+              "ViewState": "AgIAAKcAAAAAAAAAAAAqwMUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T21:27:29.93Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 16,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: linear-gradient(180deg, #eef7fa 0%, #f9fcfe 100%);
+  min-height: 100vh;
+  color: #222;
+}
+
+.admin-topbar {
+  width: 100%;
+  background: transparent;
+  padding: 28px 0 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.back-link {
+  color: #222;
+  font-size: 1.05em;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 42px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: color 0.16s;
+}
+.back-link:hover {
+  color: #1976d2;
+}
+
+.back-arrow {
+  font-size: 1.18em;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 72vh;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 2px 20px 0 #eaf6fb;
+  padding: 38px 36px 30px 36px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login-icon {
+  margin-bottom: 18px;
+}
+.lock-icon {
+  background: #25a944;
+  color: #fff;
+  font-size: 2.6em;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7px;
+}
+
+h1 {
+  font-size: 1.52em;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  color: #444;
+  font-size: 1.04em;
+  margin-bottom: 22px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  align-items: stretch;
+}
+
+.login-label {
+  text-align: left;
+  font-size: 1em;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 3px;
+  margin-top: 7px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.login-label-icon {
+  font-size: 1.1em;
+  color: #1976d2;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 9px 12px;
+  border: 1.5px solid #e0e7ef;
+  border-radius: 7px;
+  font-size: 1.02em;
+  background: #fcfdfe;
+  font-family: inherit;
+  margin-bottom: 6px;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: 2px solid #1976d2;
+  border-color: #1976d2;
+}
+
+.login-btn {
+  padding: 12px 0;
+  border-radius: 7px;
+  border: none;
+  background: #121c2c;
+  color: #fff;
+  font-size: 1.06em;
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.17s;
+}
+.login-btn:hover {
+  background: #1976d2;
+}
+
+@media (max-width: 550px) {
+  .login-card {
+    padding: 18px 8px 16px 8px;
+  }
+  .admin-topbar {
+    padding-left: 2vw;
+  }
+  .back-link {
+    margin-left: 12px;
+  }
+}
