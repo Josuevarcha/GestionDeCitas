@@ -1,6 +1,6 @@
 // ✅ CONFIGURACIÓN GLOBAL DE LA API
 const API_BASE_URL = "https://gestiondecitas.onrender.com/api/Citas";
-// const API_BASE_URL = 'https://localhost:7025/api/Citas'; // Descomenta esta línea si estás trabajando en local
+// const API_BASE_URL = 'https://localhost:7025/api/Citas'; // Descomenta esta línea si estás en local
 
 // --- UTILIDADES API ---
 async function fetchCitasFromApi() {
@@ -131,6 +131,7 @@ function renderCitas(lista) {
       abrirModalEditar(this.getAttribute("data-id"));
     };
   });
+
   document.querySelectorAll(".btn-delete").forEach((btn) => {
     btn.onclick = function () {
       eliminarCita(this.getAttribute("data-id"));
@@ -170,6 +171,7 @@ function aplicarFiltros() {
     .value.toLowerCase()
     .trim();
   const fecha = document.getElementById("filtro-fecha").value;
+
   if (nombre) {
     citas = citas.filter(
       (c) =>
@@ -180,6 +182,7 @@ function aplicarFiltros() {
   if (fecha) {
     citas = citas.filter((c) => c.fecha && c.fecha.slice(0, 10) === fecha);
   }
+
   renderCitas(citas);
   document.getElementById("num-citas").textContent = citas.length;
 }
@@ -202,7 +205,9 @@ let citaEditando = null;
 function abrirModalEditar(id) {
   const cita = citasCache.find((c) => String(c.id) === String(id));
   if (!cita) return;
+
   citaEditando = cita;
+
   document.getElementById("edit-nombre").value = cita.nombre;
   document.getElementById("edit-email").value = cita.email;
   document.getElementById("edit-telefono").value = cita.telefono;
@@ -215,6 +220,7 @@ function abrirModalEditar(id) {
 
   const oldError = document.getElementById("modal-edit-error");
   if (oldError) oldError.remove();
+
   const modal = new bootstrap.Modal(document.getElementById("editarCitaModal"));
   modal.show();
 }
@@ -259,12 +265,14 @@ document
     }
 
     const citaEditada = {
+      id: citaEditando.id,
       nombre: nuevoNombre,
+      apellido: citaEditando.apellido, // Importante: Se mantiene el apellido original
       email: nuevoEmail,
       telefono: nuevoTelefono,
-      fecha: nuevaFecha,
-      hora: nuevaHora,
       motivo: nuevoMotivo,
+      fecha: new Date(nuevaFecha + "T00:00:00").toISOString(),
+      hora: nuevaHora,
       estado: nuevoEstado,
     };
 
@@ -273,6 +281,7 @@ document
       alert("No fue posible guardar los cambios en la cita.");
       return;
     }
+
     await loadDashboard();
     bootstrap.Modal.getInstance(
       document.getElementById("editarCitaModal")
@@ -282,11 +291,13 @@ document
 // --- ELIMINAR ---
 async function eliminarCita(id) {
   if (!confirm("¿Seguro que deseas eliminar esta cita?")) return;
+
   const ok = await deleteCitaFromApi(id);
   if (!ok) {
     alert("No fue posible eliminar la cita.");
     return;
   }
+
   await loadDashboard();
 }
 
