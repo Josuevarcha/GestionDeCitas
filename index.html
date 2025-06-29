@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda tu Cita Médica en Línea</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="topbar">
+    <div class="topbar-left">
+      <span class="logo-icon"><img src="img/favicon-32x32.png" alt=""></span>
+      <span class="logo-title">Salud en Línea</span>
+    </div>
+    <div class="topbar-center">
+      <img src="img/android-chrome-192x192.png" alt="" class="rounded-circle logo-mini">
+    </div>
+    <div class="topbar-right">
+      <button class="admin-btn" onclick="window.location.href='./indexAdmin.html';">Portal Administrativo</button>
+    </div>
+  </nav>
+  <div class="container">
+    <header>
+      <h1>Agenda tu Cita Médica en Línea</h1>
+      <p>Reserva tu cita de forma rápida y sencilla, sin necesidad de registro previo</p>
+    </header>
+    <main>
+      <div class="appointment-section">
+        <div class="calendar-section">
+          <h2><i class="bi bi-calendar-event calendar-icon me-2"></i> Selecciona una Fecha</h2>
+          <div id="calendar"></div>
+          <div class="legend">
+            <span><span class="dot available"></span> Disponible</span>
+            <span><span class="dot busy"></span> Ocupado</span>
+            <span><span class="dot unavailable"></span> No disponible</span>
+          </div>
+          <div id="selected-date-label" class="selected-date-label"></div>
+        </div>
+        <div class="info-section">
+          <h2><i class="bi bi-info-circle info-icon me-2"></i> Información de la Cita</h2>
+          <div id="info-date" class="info-date"></div>
+          <form id="appointment-form">
+            <div class="times-grid">
+              <!-- Times will be injected here -->
+            </div>
+            <div class="inputs-row">
+              <div class="input-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" placeholder="Tu nombre" required>
+              </div>
+              <div class="input-group">
+                <label for="lastname">Apellido</label>
+                <input type="text" id="lastname" placeholder="Tu apellido" required>
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" placeholder="tu@email.com" required>
+            </div>
+            <div class="input-group">
+              <label for="phone">Teléfono</label>
+              <input type="tel" id="phone" placeholder="+57 300 123 4567" required>
+            </div>
+            <div class="input-group">
+              <label for="reason">Motivo de la consulta</label>
+              <input type="text" id="reason" placeholder="Breve descripción del motivo" required>
+            </div>
+            <div class="form-buttons">
+              <button type="submit" id="confirm-btn" disabled>Confirmar Cita</button>
+              <button type="button" id="cancel-btn">Cancelar</button>
+            </div>
+            <div class="note">
+              <strong>Nota:</strong> Para cancelar o modificar tu cita, por favor contacta al consultorio
+              telefónicamente.
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="features">
+        <div class="feature-box">
+          <div class="feature-icon"><i class="bi bi-clock-history"></i></div>
+          <h3>Disponibilidad 24/7</h3>
+          <p>Agenda tu cita en cualquier momento del día</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon"><i class="bi bi-envelope-at"></i></div>
+          <h3>Confirmación Automática</h3>
+          <p>Recibe confirmación y recordatorios por email</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon"><i class="bi bi-telephone-fill"></i></div>
+          <h3>Soporte Telefónico</h3>
+          <p>Contacta directamente para modificaciones</p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="./js/Calendar.js"></script>
+</body>
+
+</html>
