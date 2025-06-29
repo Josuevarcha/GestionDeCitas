@@ -8,7 +8,7 @@
         public SaludContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<SaludContext>();
-            optionsBuilder.UseSqlServer("Server=DESKTOP-7VM6UQE;Database=saludApi;User Id=sa;Password=root1234;TrustServerCertificate=True;MultipleActiveResultSets=True");
+            optionsBuilder.UseNpgsql("Host=dpg-d1gcjq6mcj7s73ck528g-a.oregon-postgres.render.com;Database=saludapidb;Username=saludapidb_user;Password=AmYHua3rIFEcJfkTzBMh3Ce981JEGobP;SSL Mode=Require;Trust Server Certificate=true");
 
             return new SaludContext(optionsBuilder.Options);
         }
