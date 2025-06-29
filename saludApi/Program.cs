@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<SaludContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSql"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ConexionSql"))
 );
 
 builder.Services.AddCors(options =>
@@ -18,7 +18,8 @@ builder.Services.AddCors(options =>
             policy.WithOrigins(
                 "http://localhost:8080",
                 "http://localhost:3000",
-                "http://127.0.0.1:5500"
+                "http://127.0.0.1:5500",
+                "https://tu-frontend-render.onrender.com" // Aquí la URL real de tu frontend
             )
             .AllowAnyHeader()
             .AllowAnyMethod();
@@ -30,10 +31,6 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
 });
-
-// Esto permite que funcione tanto en Render como en local
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-builder.WebHost.UseUrls($"http://*:{port}");
 
 var app = builder.Build();
 
