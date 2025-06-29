@@ -1,3 +1,7 @@
+// ✅ CONFIGURACIÓN GLOBAL DE LA API (autenticación)
+const API_AUTH_URL = "https://gestiondecitas.onrender.com/api/Auth";
+// const API_AUTH_URL = 'https://localhost:7025/api/Auth'; // Descomenta esta línea si estás trabajando en local
+
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".admin-login-form");
   if (!form) return;
@@ -7,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const user = document.getElementById("admin-user").value.trim();
     const pass = document.getElementById("admin-pass").value.trim();
     try {
-      const response = await fetch("https://localhost:7025/api/Auth/login", {
+      const response = await fetch(`${API_AUTH_URL}/login`, {
+        // ✅ URL corregida
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo: user, password: pass }),
@@ -40,7 +45,6 @@ function showModalMsg(msg, title = "Mensaje") {
   const modal = new bootstrap.Modal(document.getElementById("loginModalMsg"));
   modal.show();
 }
-
 <div
   class="modal fade"
   id="loginModalMsg"

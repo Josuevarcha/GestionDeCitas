@@ -1,3 +1,7 @@
+// ✅ CONFIGURACIÓN GLOBAL DE LA API
+const API_BASE_URL = "https://gestiondecitas.onrender.com/api/Citas";
+// const API_BASE_URL = 'https://localhost:7025/api/Citas'; // Descomenta esta línea si estás en local
+
 // --- Calendar and Appointment Data ---
 const calendarEl = document.getElementById("calendar");
 const selectedDateLabel = document.getElementById("selected-date-label");
@@ -43,7 +47,7 @@ function getNowHM() {
 // Trae todas las citas ocupadas desde la API
 async function fetchCitasFromApi() {
   try {
-    const response = await fetch("https://localhost:7025/api/Citas");
+    const response = await fetch(API_BASE_URL);
     if (!response.ok) throw new Error("No se pudieron cargar las citas");
     const data = await response.json();
     return data.citas || [];
@@ -55,7 +59,6 @@ async function fetchCitasFromApi() {
 
 // Citas para cierta fecha (YYYY-MM-DD)
 function getAppointmentsForDate(date) {
-  // La fecha en la BD es ISO, así que comparamos por "YYYY-MM-DD"
   return citasRegistradas.filter((cita) => cita.fecha.startsWith(date));
 }
 
@@ -77,7 +80,6 @@ function renderCalendar(year, month) {
     "December",
   ];
 
-  // Header
   const calHeader = document.createElement("div");
   calHeader.className = "calendar-header";
   calHeader.style.display = "flex";
@@ -126,7 +128,6 @@ function renderCalendar(year, month) {
   calHeader.appendChild(nextBtn);
   calendarEl.appendChild(calHeader);
 
-  // Days headers
   const daysRow = document.createElement("div");
   daysRow.className = "calendar-days-row";
   daysRow.style.display = "grid";
@@ -143,7 +144,6 @@ function renderCalendar(year, month) {
   });
   calendarEl.appendChild(daysRow);
 
-  // Dates grid
   const firstDay = new Date(year, month, 1).getDay();
   const lastDate = new Date(year, month + 1, 0).getDate();
   const daysGrid = document.createElement("div");
@@ -175,7 +175,6 @@ function renderCalendar(year, month) {
       const dateObj = new Date(year, month, dayNum);
       const isSunday = dateObj.getDay() === 0;
 
-      // No se puede seleccionar días que ya pasaron o domingos
       if (dateStr < todayISO) status = "unavailable";
       else if (isSunday) status = "unavailable";
 
@@ -183,7 +182,6 @@ function renderCalendar(year, month) {
       cell.dataset.date = dateStr;
       cell.classList.add("calendar-day", status);
 
-      // Styling
       if (status === "unavailable") {
         cell.style.background = "#f3f3f3";
         cell.style.color = "#bdbdbd";
@@ -195,14 +193,12 @@ function renderCalendar(year, month) {
         cell.style.border = "1px solid #e0e7ef";
       }
 
-      // Selección
       if (selectedDate === dateStr) {
         cell.style.background = "#1976d2";
         cell.style.color = "#fff";
         cell.style.border = "1.5px solid #1976d2";
       }
 
-      // Click handler solo si está disponible
       if (status === "available") {
         cell.addEventListener("click", () => {
           selectedDate = dateStr;
@@ -244,7 +240,6 @@ function renderTimes() {
   timesGrid.innerHTML = "";
   if (!selectedDate) return;
 
-  // Horas ocupadas por día (desde la base de datos)
   const busyTimes = getAppointmentsForDate(selectedDate).map(
     (cita) => cita.hora
   );
@@ -259,7 +254,6 @@ function renderTimes() {
 
     let disabled = false;
 
-    // Si el día es hoy, bloquear horas previas a la actual
     if (selectedDate === todayISO) {
       const [h, m] = time.split(":").map(Number);
       if (h < nowHour || (h === nowHour && m <= nowMinute)) {
@@ -268,7 +262,6 @@ function renderTimes() {
       }
     }
 
-    // Si la hora ya está ocupada
     if (busyTimes.includes(time)) {
       btn.classList.add("unavailable");
       disabled = true;
@@ -293,7 +286,6 @@ function renderTimes() {
 
 // --- Form & Validation ---
 function updateFormStatus() {
-  // Enable submit only if all required fields are filled and timeslot is available
   const name = document.getElementById("name").value.trim();
   const lastname = document.getElementById("lastname").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -319,7 +311,6 @@ appointmentForm.addEventListener("input", updateFormStatus);
 appointmentForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // Obtén los datos del formulario
   const name = document.getElementById("name").value.trim();
   const lastname = document.getElementById("lastname").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -331,7 +322,6 @@ appointmentForm.addEventListener("submit", function (e) {
     return;
   }
 
-  // Nueva cita para enviar al backend
   const nuevaCita = {
     id: 0,
     nombre: name,
@@ -344,7 +334,7 @@ appointmentForm.addEventListener("submit", function (e) {
     estado: "Pendiente",
   };
 
-  fetch("https://localhost:7025/api/Citas", {
+  fetch(API_BASE_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(nuevaCita),
@@ -354,7 +344,6 @@ appointmentForm.addEventListener("submit", function (e) {
         alert("¡Cita confirmada y guardada en la base de datos!");
         appointmentForm.reset();
         selectedTime = null;
-        // Recarga las citas desde el backend y refresca el calendario
         fetchCitasFromApi().then((citas) => {
           citasRegistradas = citas;
           renderCalendar(

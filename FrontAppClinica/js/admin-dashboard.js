@@ -1,7 +1,11 @@
+// ✅ CONFIGURACIÓN GLOBAL DE LA API
+const API_BASE_URL = "https://gestiondecitas.onrender.com/api/Citas";
+// const API_BASE_URL = 'https://localhost:7025/api/Citas'; // Descomenta esta línea si estás trabajando en local
+
 // --- UTILIDADES API ---
 async function fetchCitasFromApi() {
   try {
-    const response = await fetch("https://localhost:7025/api/Citas");
+    const response = await fetch(API_BASE_URL);
     if (!response.ok) throw new Error("No se pudieron cargar las citas");
     const data = await response.json();
     return data.citas || [];
@@ -13,7 +17,7 @@ async function fetchCitasFromApi() {
 
 async function patchCitaToApi(id, citaEditada) {
   try {
-    const response = await fetch(`https://localhost:7025/api/Citas/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(citaEditada),
@@ -27,7 +31,7 @@ async function patchCitaToApi(id, citaEditada) {
 
 async function deleteCitaFromApi(id) {
   try {
-    const response = await fetch(`https://localhost:7025/api/Citas/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: "DELETE",
     });
     return response.ok;
@@ -40,11 +44,11 @@ async function deleteCitaFromApi(id) {
 // --- FORMATO FECHA/HORA ---
 function formatFecha(fecha) {
   if (!fecha) return "";
-  // Puede venir "YYYY-MM-DD" o ISO
   const base = fecha.slice(0, 10);
   const [y, m, d] = base.split("-");
   return `${d}/${m}/${y}`;
 }
+
 function formatHora(hora) {
   if (!hora) return "";
   return hora.length === 5 ? hora : hora.slice(0, 5);
@@ -122,7 +126,6 @@ function renderCitas(lista) {
     cont.appendChild(citaDiv);
   });
 
-  // Eventos para botones
   document.querySelectorAll(".btn-edit").forEach((btn) => {
     btn.onclick = function () {
       abrirModalEditar(this.getAttribute("data-id"));
@@ -148,15 +151,18 @@ function estadoBadgeStyle(estado) {
   }
   return "";
 }
+
 function btnEditStyle() {
   return "background:#fff;border:1.4px solid #aaa;color:#222;font-weight:600;padding:7px 0;border-radius:7px;transition:background .14s;border-left:4.2px solid #1976d2;";
 }
+
 function btnDeleteStyle() {
   return "background:#ef4444;color:#fff;border:none;font-weight:600;padding:7px 0;border-radius:7px;transition:background .14s;";
 }
 
 // --- FILTROS ---
 let citasCache = [];
+
 function aplicarFiltros() {
   let citas = citasCache;
   const nombre = document
@@ -177,6 +183,7 @@ function aplicarFiltros() {
   renderCitas(citas);
   document.getElementById("num-citas").textContent = citas.length;
 }
+
 document
   .getElementById("filtro-nombre")
   .addEventListener("input", aplicarFiltros);
@@ -191,6 +198,7 @@ document.getElementById("limpiar-filtros").addEventListener("click", () => {
 
 // --- MODAL EDITAR ---
 let citaEditando = null;
+
 function abrirModalEditar(id) {
   const cita = citasCache.find((c) => String(c.id) === String(id));
   if (!cita) return;
@@ -204,7 +212,7 @@ function abrirModalEditar(id) {
   document.getElementById("edit-hora").value = cita.hora;
   document.getElementById("edit-motivo").value = cita.motivo;
   document.getElementById("edit-estado").value = cita.estado;
-  // Limpiar error anterior si existe
+
   const oldError = document.getElementById("modal-edit-error");
   if (oldError) oldError.remove();
   const modal = new bootstrap.Modal(document.getElementById("editarCitaModal"));
@@ -216,7 +224,7 @@ document
   .addEventListener("submit", async function (e) {
     e.preventDefault();
     if (!citaEditando) return;
-    // Tomar los nuevos valores del formulario
+
     const nuevoNombre = document.getElementById("edit-nombre").value.trim();
     const nuevoEmail = document.getElementById("edit-email").value.trim();
     const nuevoTelefono = document.getElementById("edit-telefono").value.trim();
@@ -225,7 +233,6 @@ document
     const nuevoMotivo = document.getElementById("edit-motivo").value.trim();
     const nuevoEstado = document.getElementById("edit-estado").value;
 
-    // Validar si existe otra cita con la misma fecha y hora (distinta id)
     const existe = citasCache.some(
       (c) =>
         String(c.id) !== String(citaEditando.id) &&
@@ -234,7 +241,6 @@ document
         c.hora === nuevaHora
     );
 
-    // Mostrar error si ya existe
     let errorDiv = document.getElementById("modal-edit-error");
     if (existe) {
       if (!errorDiv) {
@@ -252,7 +258,6 @@ document
       errorDiv.remove();
     }
 
-    // PATCH a la API
     const citaEditada = {
       nombre: nuevoNombre,
       email: nuevoEmail,
@@ -262,12 +267,12 @@ document
       motivo: nuevoMotivo,
       estado: nuevoEstado,
     };
+
     const ok = await patchCitaToApi(citaEditando.id, citaEditada);
     if (!ok) {
       alert("No fue posible guardar los cambios en la cita.");
       return;
     }
-    // Actualizar cache, refrescar dashboard
     await loadDashboard();
     bootstrap.Modal.getInstance(
       document.getElementById("editarCitaModal")
@@ -292,4 +297,5 @@ async function loadDashboard() {
   renderCitas(citasCache);
   aplicarFiltros();
 }
+
 window.addEventListener("DOMContentLoaded", loadDashboard);
