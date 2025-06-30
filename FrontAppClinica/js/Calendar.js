@@ -341,7 +341,7 @@ appointmentForm.addEventListener("submit", function (e) {
   })
     .then((response) => {
       if (response.ok) {
-        alert("¡Cita confirmada y guardada en la base de datos!");
+        alert("Cita Registrada correctamente se te notificará por email.");
         appointmentForm.reset();
         selectedTime = null;
         fetchCitasFromApi().then((citas) => {
@@ -355,7 +355,7 @@ appointmentForm.addEventListener("submit", function (e) {
           updateFormStatus();
         });
       } else {
-        alert("Error al guardar la cita en la base de datos.");
+        alert("Error al Registrar la cita.");
       }
     })
     .catch((error) => {
